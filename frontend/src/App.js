@@ -27,6 +27,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>image gallery [{imgCount}]</h1>
       <header className="p-2">
         <button
           className="m-1"
@@ -45,8 +46,6 @@ function App() {
         <button className="m-1" onClick={resetImgCount}>
           🔄 reset to {defaultImgCount}
         </button>
-
-        <span className="m-1">images: {imgCount}</span>
       </header>
 
       <section className="img-container">
