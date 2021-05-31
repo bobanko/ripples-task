@@ -1,10 +1,12 @@
 import { useState } from "react";
-import logo from "./logo.svg";
+
 import "./App.css";
 
+import logo from "./images/logo.svg";
+
 function App() {
-  const defaultImgCount = 1;
-  const maxImgCount = 10;
+  const defaultImgCount = 3;
+  const maxImgCount = 100;
 
   const [imgCount, setImgCount] = useState(defaultImgCount);
 
@@ -25,18 +27,36 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <button onClick={increaseImgCount}>➕</button>
-        <button onClick={decreaseImgCount}>➖</button>
-        <button onClick={resetImgCount}>⏺ reset</button>
+      <header className="p-2">
+        <button
+          className="m-1"
+          disabled={imgCount >= maxImgCount}
+          onClick={increaseImgCount}
+        >
+          ➕
+        </button>
+        <button
+          className="m-1"
+          disabled={imgCount <= defaultImgCount}
+          onClick={decreaseImgCount}
+        >
+          ➖
+        </button>
+        <button className="m-1" onClick={resetImgCount}>
+          🔄 reset to {defaultImgCount}
+        </button>
+
+        <span className="m-1">images: {imgCount}</span>
       </header>
 
-      {Array(imgCount)
-        .fill(0)
-        .map((_, index) => (
-          // in this case using array index as a key is fine
-          <img key={index} src={logo} className="App-logo" alt="logo" />
-        ))}
+      <section className="img-container">
+        {Array(imgCount)
+          .fill(0)
+          .map((_, index) => (
+            // in this case using array index as a key is fine
+            <img key={index} src={logo} className="img" alt="image" />
+          ))}
+      </section>
     </div>
   );
 }
