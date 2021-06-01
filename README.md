@@ -27,7 +27,8 @@ Some rolls:
 
 1. Once a user presses a button there will be DB update action. In case the entry doesn’t exist the action will create it.
 2. Each tab creates a different session.
-3. For each session you need to write to the DB : CreatedAt, updateAt, Counter, sessionID.
+3. For each session you need to write to the DB :
+   CreatedAt, updateAt, Counter, sessionID.
 
 The design should assume thousands of sessions.
 
