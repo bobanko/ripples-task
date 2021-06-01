@@ -42,3 +42,15 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px; */
 }
+
+.debug-placeholder {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.session-info {
+  padding: 10px;
+  background: #8080803d;
+  border-radius: 10px 0px 0px 0px;
+}
