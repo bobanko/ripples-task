@@ -2,25 +2,29 @@ import { useState, useEffect } from "react";
 
 import "./App.css";
 
-import logo from "./images/logo.svg";
+import logo from "./images/logo.png";
 import sessionService from "./session.service";
 
 function App() {
   console.log("render");
 
-  const defaultImgCount = 3;
+  const minImgCount = 0;
   const maxImgCount = 100;
+  const defaultImgCount = 3;
   const rowSize = 5;
 
   const [sessionId, setSessionId] = useState(null);
 
-  const [imgCount, setImgCount] = useState(defaultImgCount);
+  const [imgCount, setImgCount] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    sessionService.getSessionId().then(_sessionId => {
-      setSessionId(_sessionId);
+    sessionService.getSessionId().then(async _sessionId => {
+      const session = await sessionService.getSession(_sessionId);
+
+      setSessionId(session._id);
+      setImgCount(session.counter);
     });
   }, []);
 
@@ -41,7 +45,7 @@ function App() {
   }
 
   function decreaseImgCount() {
-    if (imgCount <= defaultImgCount) return;
+    if (imgCount <= minImgCount) return;
 
     updateImgCount(imgCount - 1);
   }
@@ -65,7 +69,7 @@ function App() {
         </button>
         <button
           className="m-1"
-          disabled={imgCount <= defaultImgCount || isLoading}
+          disabled={imgCount <= minImgCount || isLoading}
           onClick={decreaseImgCount}
         >
           ➖
