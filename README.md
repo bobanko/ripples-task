@@ -2,6 +2,8 @@
 
 ## my inverview test task for ripples
 
+![preview](https://repository-images.githubusercontent.com/372591283/71c97800-c3c3-11eb-9bf2-84d5b2aff420)
+
 ## LIVE DEMO:
 
 https://bobanko.github.io/ripples-task/frontend/build/index.html
