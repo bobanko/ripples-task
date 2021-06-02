@@ -33,7 +33,7 @@ class DbService {
       createdAt: new Date(),
       updatedAt: new Date(),
       counter: this.config.defaultImageCount,
-      sessionId: null,
+      // sessionId: null, // _id is used instead
     };
 
     try {
@@ -49,6 +49,25 @@ class DbService {
     }
   }
 
+  getSession(sessionId) {
+    const sessionsCollection = this.client
+      .db(this.config.dbName)
+      .collection("sessions");
+
+    const query = { _id: ObjectId(sessionId) };
+
+    console.log("trying to find", sessionId);
+
+    return sessionsCollection.findOne(query).then(value => {
+      if (value) {
+        console.log(`document found`, value);
+      } else {
+        console.log("No document matches the provided query.");
+      }
+      return value;
+    });
+  }
+
   updateSession({ sessionId, counter }) {
     const sessionsCollection = this.client
       .db(this.config.dbName)
@@ -56,7 +75,7 @@ class DbService {
 
     const query = { _id: ObjectId(sessionId) };
 
-    console.log("trying to update to", counter);
+    console.log("trying to update", sessionId, " to", counter);
     const update = {
       $set: {
         updatedAt: new Date(),
@@ -70,13 +89,13 @@ class DbService {
         returnOriginal: false, // working one
         // new: false, // 💩
       })
-      .then(({ value: updatedDocument }) => {
-        if (updatedDocument) {
-          console.log(`Successfully updated document`, updatedDocument);
+      .then(({ value }) => {
+        if (value) {
+          console.log(`Successfully updated document`, value);
         } else {
           console.log("No document matches the provided query.");
         }
-        return updatedDocument;
+        return value;
       });
   }
 

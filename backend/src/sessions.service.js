@@ -4,7 +4,7 @@ const router = express.Router();
 const dbService = require("./db.service");
 
 // sessions/
-router.get("/", async function (req, res) {
+router.get("/all", async function (req, res) {
   const sessions = await dbService.getSessions();
 
   console.log("sessions", sessions);
@@ -19,6 +19,17 @@ router.post("/create", async function (req, res) {
   console.log(`session created: ${sessionId}`);
 
   res.send(sessionId.toString());
+});
+
+// gets existing session
+router.get("/get", async function (req, res) {
+  console.log(req.query);
+
+  const session = await dbService.getSession(req.query.sessionId);
+
+  console.log(`session found`, session);
+
+  res.json(session);
 });
 
 // updates session
