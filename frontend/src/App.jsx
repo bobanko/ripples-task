@@ -6,7 +6,7 @@ import logo from "./images/logo.svg";
 import sessionService from "./session.service";
 
 function App() {
-  console.log("first init");
+  console.log("render");
 
   const defaultImgCount = 3;
   const maxImgCount = 100;
@@ -16,25 +16,38 @@ function App() {
 
   const [imgCount, setImgCount] = useState(defaultImgCount);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     sessionService.getSessionId().then(_sessionId => {
       setSessionId(_sessionId);
     });
   }, []);
 
+  function updateImgCount(_imgCount) {
+    setIsLoading(true);
+    return sessionService
+      .updateSession({ sessionId, counter: _imgCount })
+      .then(sessionData => {
+        setImgCount(+sessionData.counter);
+        setIsLoading(false);
+      });
+  }
+
   function increaseImgCount() {
     if (imgCount >= maxImgCount) return;
 
-    setImgCount(imgCount + 1);
+    updateImgCount(imgCount + 1);
   }
+
   function decreaseImgCount() {
     if (imgCount <= defaultImgCount) return;
 
-    setImgCount(imgCount - 1);
+    updateImgCount(imgCount - 1);
   }
 
   function resetImgCount() {
-    setImgCount(defaultImgCount);
+    updateImgCount(defaultImgCount);
   }
 
   const mtx = [];
@@ -45,19 +58,19 @@ function App() {
       <header className="p-2">
         <button
           className="m-1"
-          disabled={imgCount >= maxImgCount}
+          disabled={imgCount >= maxImgCount || isLoading}
           onClick={increaseImgCount}
         >
           ➕
         </button>
         <button
           className="m-1"
-          disabled={imgCount <= defaultImgCount}
+          disabled={imgCount <= defaultImgCount || isLoading}
           onClick={decreaseImgCount}
         >
           ➖
         </button>
-        <button className="m-1" onClick={resetImgCount}>
+        <button className="m-1" disabled={isLoading} onClick={resetImgCount}>
           🔄 reset to {defaultImgCount}
         </button>
       </header>
