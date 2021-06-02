@@ -11,6 +11,8 @@ app.listen(port, () => {
 });
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", function (req, res) {
   res.send("ripples-task api test page");
