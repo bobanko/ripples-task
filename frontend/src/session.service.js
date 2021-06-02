@@ -47,6 +47,18 @@ class SessionService {
 
     return sessionId;
   }
+
+  async getSession(sessionId) {
+    const getSessionUrl = `${this.config.apiUrl}/sessions/get?sessionId=${sessionId}`;
+
+    const session = await fetch(getSessionUrl, { method: "get" }).then(data =>
+      data.json()
+    );
+
+    if (!session) return null;
+
+    return session;
+  }
 }
 
 export default new SessionService({
