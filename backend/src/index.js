@@ -4,7 +4,7 @@ const cors = require("cors");
 const sessionsSvc = require("./sessions.service");
 
 const app = express();
-const port = 3030;
+const port = process.env.PORT || 3030;
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
@@ -19,3 +19,5 @@ app.get("/", function (req, res) {
 });
 
 app.use("/sessions", sessionsSvc);
+
+module.exports = app;
