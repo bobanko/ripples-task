@@ -1,4 +1,4 @@
-const MongoClient = require("mongodb").MongoClient;
+const { MongoClient, ObjectId } = require("mongodb");
 
 const config = require("./config.json");
 
@@ -49,6 +49,38 @@ class DbService {
     }
   }
 
+  updateSession({ sessionId, counter }) {
+    const sessionsCollection = this.client
+      .db(this.config.dbName)
+      .collection("sessions");
+
+    const query = { _id: ObjectId(sessionId) };
+
+    console.log("trying to update to", counter);
+    const update = {
+      $set: {
+        updatedAt: new Date(),
+        counter,
+      },
+    };
+
+    return sessionsCollection
+      .findOneAndUpdate(query, update, {
+        // returnNewDocument: true, // 💩
+        returnOriginal: false, // working one
+        // new: false, // 💩
+      })
+      .then(({ value: updatedDocument }) => {
+        if (updatedDocument) {
+          console.log(`Successfully updated document`, updatedDocument);
+        } else {
+          console.log("No document matches the provided query.");
+        }
+        return updatedDocument;
+      });
+  }
+
+  // debug
   async getSessions() {
     const sessionsCollection = this.client
       .db(this.config.dbName)
