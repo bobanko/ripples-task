@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import "./App.css";
 
-import logo from "./images/logo.svg";
+import logo from "./images/logo-ripples.svg";
 import sessionService from "./session.service";
 
 function App() {
