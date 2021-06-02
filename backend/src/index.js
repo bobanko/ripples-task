@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3030;
 
 app.listen(port, () => {
-  console.log(`app listening at http://localhost:${port}`);
+  console.log(`app listening at :${port}`);
 });
 
 app.use(cors());

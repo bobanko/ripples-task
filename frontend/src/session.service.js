@@ -1,3 +1,5 @@
+import config from "../config.json";
+
 class SessionService {
   constructor(config) {
     this.config = config;
@@ -61,6 +63,4 @@ class SessionService {
   }
 }
 
-export default new SessionService({
-  apiUrl: "http://localhost:3030",
-});
+export default new SessionService(config);
