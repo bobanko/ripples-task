@@ -1,3 +1,8 @@
+html {
+  /* for those who set scroll to be always visible */
+  width: 100%;
+}
+
 body {
   /* 
   use with big raster images

@@ -9,14 +9,11 @@ function App() {
   console.log("render");
 
   const minImgCount = 0;
-  const maxImgCount = 100;
+  const maxImgCount = 35;
   const defaultImgCount = 3;
-  // const rowSize = 5;
 
   const [sessionId, setSessionId] = useState(null);
-
   const [imgCount, setImgCount] = useState(0);
-
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
