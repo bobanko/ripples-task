@@ -12,13 +12,31 @@ class SessionService {
   }
 
   async _createSessionId() {
-    const createSessionUrl = `${this.apiUrl}/sessions/create`;
+    const createSessionUrl = `${this.config.apiUrl}/sessions/create`;
 
     const sessionId = await fetch(createSessionUrl, { method: "post" }).then(
       data => data.text()
     );
 
+    if (!sessionId) return null;
+
     return sessionId;
+  }
+
+  async updateSession({ sessionId, counter }) {
+    const createSessionUrl = `${this.config.apiUrl}/sessions/update`;
+
+    const body = { sessionId, counter };
+
+    const session = await fetch(createSessionUrl, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then(data => data.json());
+
+    return session;
   }
   // ##################
   async getSessionId() {
@@ -32,5 +50,5 @@ class SessionService {
 }
 
 export default new SessionService({
-  apiUrl: "http://localhost:3030/",
+  apiUrl: "http://localhost:3030",
 });
