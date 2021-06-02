@@ -1,5 +1,9 @@
 body {
-  min-width: 750px;
+  /* 
+  use with big raster images
+  formula: img width * column count
+  */
+  /* min-width: 750px; */
 }
 
 .App {
