@@ -4,5 +4,5 @@
 "cluster": "cluster0.askp4",
 "dbName": "ripples-task-db",
 
-"defaultImageCount": "3"
+"defaultImageCount": 3
 }
