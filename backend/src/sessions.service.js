@@ -16,9 +16,20 @@ router.get("/", async function (req, res) {
 router.post("/create", async function (req, res) {
   const sessionId = await dbService.createSession();
 
-  console.log("session created", sessionId);
+  console.log(`session created: ${sessionId}`);
 
-  res.send(sessionId);
+  res.send(sessionId.toString());
+});
+
+// updates session
+router.post("/update", async function (req, res) {
+  const { sessionId, counter } = req.body;
+
+  const session = await dbService.updateSession({ sessionId, counter });
+
+  console.log(`session`, session._id, `updated to`, counter);
+
+  res.json(session);
 });
 
 // define the about route
