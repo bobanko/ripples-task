@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import "./App.css";
 
-import logo from "./images/logo.png";
+import logo from "./images/logo.svg";
 import sessionService from "./session.service";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
   const minImgCount = 0;
   const maxImgCount = 100;
   const defaultImgCount = 3;
-  const rowSize = 5;
+  // const rowSize = 5;
 
   const [sessionId, setSessionId] = useState(null);
 
@@ -53,8 +53,6 @@ function App() {
   function resetImgCount() {
     updateImgCount(defaultImgCount);
   }
-
-  const mtx = [];
 
   return (
     <div className="App">

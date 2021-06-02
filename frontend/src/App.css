@@ -1,10 +1,9 @@
-.App {
-  text-align: center;
+body {
+  min-width: 750px;
 }
 
-.img {
-  pointer-events: none;
-  max-width: 20vw; /* 1/5 */
+.App {
+  text-align: center;
 }
 
 /* Bootstrap-like */
@@ -41,6 +40,13 @@
   grid-template-columns: repeat(5, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px; */
+}
+
+.img {
+  pointer-events: none;
+  flex-grow: 1;
+  /* 100% / images per row */
+  min-height: 20vw;
 }
 
 .debug-placeholder {
