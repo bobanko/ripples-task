@@ -30,15 +30,11 @@ body {
   margin: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+header {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff9c;
+  box-shadow: 0 -3px 8px black;
 }
 
 .img-container {

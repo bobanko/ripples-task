@@ -53,8 +53,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>🌁 image gallery [{imgCount}]</h1>
       <header className="p-2">
+        <h1>🌁 image gallery [{imgCount}]</h1>
         <button
           className="m-1"
           disabled={imgCount >= maxImgCount || isLoading}
